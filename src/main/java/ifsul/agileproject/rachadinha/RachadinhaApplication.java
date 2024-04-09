@@ -8,6 +8,7 @@ public class RachadinhaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RachadinhaApplication.class, args);
+		System.out.println("Hello, world!");
 	}
 
 }

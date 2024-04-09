@@ -31,8 +31,17 @@ public class UserController {
     //Cadastrar user
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User saveCliente(@RequestBody User cliente){
-        return userRepository.save(cliente);
+    public User saveCliente(@RequestBody User usuario){
+        /*
+         * Verificar se já há um usuário com esse id
+        if (!userRepository.existsById(usuario.getId())) {
+            return userRepository.save(usuario);
+        } else {
+            return ResponseStatusException(HttpStatus.BAD_REQUEST)
+        }
+        */
+
+        return userRepository.save(usuario);
     }
 
     //Deletar

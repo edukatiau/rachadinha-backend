@@ -1,3 +1,4 @@
+//Classe Usuário
 package ifsul.agileproject.rachadinha.domain.entity;
 
 import jakarta.persistence.*;

@@ -61,4 +61,15 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    @GetMapping("/findByEmail")
+    @ResponseStatus(HttpStatus.OK)
+    public User findByEmail(@RequestBody User usuario){
+        return userRepository.findByEmail(usuario.getEmail());
+    }
+
+    @GetMapping("/findByEmailAndPass")
+    public User findByEmailAndPass(@RequestBody User usuario){
+        return userRepository.findByEmailAndPassword(usuario.getEmail(), usuario.getPassword());
+    }
+
 }

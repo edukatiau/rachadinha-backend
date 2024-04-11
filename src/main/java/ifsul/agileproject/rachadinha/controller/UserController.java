@@ -32,15 +32,6 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User saveCliente(@RequestBody User usuario){
-        /*
-         * Verificar se já há um usuário com esse id
-        if (!userRepository.existsById(usuario.getId())) {
-            return userRepository.save(usuario);
-        } else {
-            return ResponseStatusException(HttpStatus.BAD_REQUEST)
-        }
-        */
-
         return userRepository.save(usuario);
     }
 
@@ -52,10 +43,15 @@ public class UserController {
     }
 
     //Atualizar
-    @PatchMapping
+    @PatchMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User updateUser(@RequestBody User usuario){
-        return userRepository.save(usuario);
+    public User updateUser(@RequestBody User usuario, @PathVariable Integer id){
+        if(userRepository.existsById(id)){
+            usuario.setId(id);
+            return userRepository.save(usuario);
+        }else{
+            return new User();
+        }
     }
 
     //Busca todos
@@ -63,6 +59,17 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<User> findAll(){
         return userRepository.findAll();
+    }
+
+    @GetMapping("/findByEmail")
+    @ResponseStatus(HttpStatus.OK)
+    public User findByEmail(@RequestBody User usuario){
+        return userRepository.findByEmail(usuario.getEmail());
+    }
+
+    @GetMapping("/findByEmailAndPass")
+    public User findByEmailAndPass(@RequestBody User usuario){
+        return userRepository.findByEmailAndPassword(usuario.getEmail(), usuario.getPassword());
     }
 
 }
